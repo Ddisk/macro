@@ -1611,9 +1611,79 @@ header,
   inset: auto !important;
   transform: none !important;
 }
+
+/* ===== v6 annual layout + top page fixes ===== */
+.annual-title-green{
+  background:#0C7D3E;
+  color:#fff;
+  border-radius:18px;
+  padding:18px 22px;
+  font-size:clamp(24px,2.4vw,34px);
+  font-weight:900;
+  line-height:1.25;
+  margin-bottom:12px;
+}
+.annual-status-panel{
+  grid-template-columns:minmax(0,1fr) auto!important;
+}
+.annual-status-values{
+  display:flex;
+  gap:6px;
+  align-items:stretch;
+  justify-content:flex-end;
+}
+.annual-small-status{
+  width:108px!important;
+  min-width:108px!important;
+  padding:6px 7px!important;
+}
+.annual-small-status span{
+  font-size:10px!important;
+  line-height:1.2;
+}
+.annual-small-status b{
+  font-size:18px!important;
+  line-height:1.1;
+}
+.top-home-bar{
+  position:static!important;
+  top:auto!important;
+  left:auto!important;
+  right:auto!important;
+  z-index:auto!important;
+  width:100%;
+  max-width:1200px;
+  margin:0 auto 10px;
+  padding:10px 16px 0;
+  background:transparent;
+}
+.top-home-bar a{
+  display:inline-block;
+  text-decoration:none;
+  font-weight:900;
+  color:#176A3E;
+  background:#F1F8F3;
+  border:1px solid #CFE3D5;
+  border-radius:10px;
+  padding:8px 12px;
+}
+@media(max-width:760px){
+  .annual-status-panel{
+    grid-template-columns:1fr!important;
+  }
+  .annual-status-values{
+    width:100%;
+    justify-content:stretch;
+  }
+  .annual-small-status{
+    flex:1 1 0;
+    width:auto!important;
+    min-width:0!important;
+  }
+}
 </style>
 </head>
-<body><div id="pageTop"></div><a class="guide-home-link" href="index.html">← トップページ</a>
+<body><div class="top-home-bar"><a href="index.html">← トップページ</a></div><div id="pageTop"></div>
 <header>
 <h1>Excelマクロ・VBAでできること</h1>
 <p>図で仕組みをつかみ、動くデモで「このコードが何をしているか」を確認する初心者向け資料です。</p>
@@ -1780,7 +1850,7 @@ End Sub</code></pre>
 <section id="all">
 <h2 class="visually-hidden-title">10. 総合例：1月～12月をまとめる</h2>
 <div class="annual-merge-intro">
-<div class="annual-title">1月～12月のファイルを、まとめ.xlsx に集約</div>
+<div class="annual-title-green">1月～12月のファイルを、まとめ.xlsx に集約</div>
 <div class="annual-rule-grid">
 <div class="annual-rule jan-rule">
 <b>1月.xlsx</b>
@@ -1792,14 +1862,7 @@ End Sub</code></pre>
 </div>
 </div>
 </div>
-<div class="annual-demo-head">
-<div class="annual-demo-title">実際に1月から12月まで順番にまとめる様子</div>
-<div class="annual-state-grid">
-<div class="annual-state-card"><span>現在の月</span><b id="allMonth">-</b></div>
-<div class="annual-state-card"><span>コピー範囲</span><b id="allCopyRange">-</b></div>
-<div class="annual-state-card"><span>貼り付け開始行</span><b id="allPasteRow">-</b></div>
-</div>
-</div>
+
 <div class="demo merge-demo annual-merge-demo">
 <div class="code-panel">
 <div class="code-title">VBAコード</div>
@@ -1825,16 +1888,34 @@ End Sub</code></pre>
 <div class="code-row"><code>Next monthNo</code><span>次の月へ</span></div>
 <div class="code-row"><code>Application.CutCopyMode = False</code><span>コピー状態を解除</span></div>
 </div>
+
+<div class="status-panel annual-status-panel">
+<div class="status-explain">
+<b id="allTitle">準備完了</b>
+<span id="allMsg">1月は見出しを含む1行目から、2月以降は2行目からコピーします。</span>
+</div>
+<div class="annual-status-values">
+<div class="status-value annual-small-status">
+<span>現在の月</span>
+<b id="allMonth">-</b>
+</div>
+<div class="status-value annual-small-status">
+<span>コピー範囲</span>
+<b id="allCopyRange">-</b>
+</div>
+<div class="status-value annual-small-status">
+<span>貼り付け開始行</span>
+<b id="allPasteRow">-</b>
+</div>
+</div>
+</div>
 <div class="controls">
 <button id="allBack">◀ 戻る</button>
 <button id="allPlay">▶ 再生</button>
 <button id="allNext">次へ ▶</button>
 <button id="allReset">↺ リセット</button>
 </div>
-<div class="demo-message">
-<b id="allTitle">準備完了</b>
-<span id="allMsg">1月は1行目から、2月以降は2行目からコピーします。</span>
-</div>
+
 </div>
 <div class="sheet-panel annual-sheet-panel">
 <div class="annual-book-tabs" id="annualTabs"></div>
